@@ -1,0 +1,11 @@
+{
+    "Lua.diagnostics.globals": [
+        "SMODS",
+        "DE_UTIL",
+        "localize",
+        "HEX",
+        "G",
+        "Event",
+        "card_eval_status_text"
+    ]
+}

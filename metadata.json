@@ -1,0 +1,11 @@
+{
+  "id": "denouement",
+  "name": "Denouement",
+  "prefix": "denouement",
+  "author": ["J4MMUU!"],
+  "description": "Well polished mod with some original and some not ideas :P",
+  "main_file": "denouement.lua",
+  "badge_colour": "ad2d36",
+  "version": "0.0.1-alpha",
+  "dependencies": ["Steamodded (>=1.0.0~BETA-0711a)", "Lovely (>=0.7.1)"]
+}
