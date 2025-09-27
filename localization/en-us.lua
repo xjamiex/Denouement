@@ -15,6 +15,17 @@ return {
                     "{C:inactive}current state:{V:2} #3#",
                     "{C:inactive}currently {X:mult,C:white} X#1#{} Mult",
 		        }
+            },
+            j_denouement_pyrite = {
+                name = {
+                    'Pyrite',
+                },
+                text = {
+                    "Switches bwtween {V:1}[CACHE]{} state",
+                    "and {V:2}[TRANSFER]{} state",
+                    "{C:inactive}current state:{V:3} #3#",
+                    "{C:inactive}current money stored: {C:money}$#4#{}",
+		        }
             }
         },
         Other={
@@ -39,6 +50,29 @@ return {
                     "Lose {X:mult,C:white} X#1#{} Mult",
                     "every hand",
                     "{C:inactive}Xmult is applied in this state"
+                }
+            },
+            cache_pyrite = {
+                name = {
+                    '{V:1}[CACHE]{}'
+                },
+                text = {
+                    "While in {V:1}[CACHE]{}",
+                    "Everytime anything is purchased",
+                    "store {C:money}$#1#{}",
+                    "into this joker"
+                }
+            },
+            transfer_pyrite = {
+                name = {
+                    '{V:1}[TRANSFER]{}'
+                },
+                text = {
+                    "While in {V:1}[TRANSFER]{}",
+                    "Transfer {C:money}$#1#{} from",
+                    "this joker to your money",
+                    "when a played card with {V:1}Diamonds{}",
+                    "suit is scored"
                 }
             }
         },
@@ -74,6 +108,9 @@ return {
             },
             exhausted_rose_quartz = {
                 "Exhausted!"
+            },
+            cached_pyrite = {
+                "Cached!"
             },
         },
         v_text={},
