@@ -4,10 +4,10 @@ SMODS.Joker {
     denouement_can_switch = true,
 
 	config = { extra = { 
-		money_gain = 10,
-		money_transferred = 1,
+		money_gain = 6,
+		money_transfer = 3,
 		money_stored = 0,
-        --false = ??
+        --false = cache
         switched = false
     }},
 
@@ -22,7 +22,7 @@ SMODS.Joker {
         }
         info_queue[#info_queue+1] = {key = 'transfer_pyrite', set = 'Other',
             vars = {
-                card.ability.extra.money_transferred,
+                card.ability.extra.money_transfer,
 				colours = {
                     G.C.SUITS.Diamonds,
                 }
@@ -31,7 +31,7 @@ SMODS.Joker {
 
 		return { vars = {
             card.ability.extra.money_gain,
-            card.ability.extra.money_transferred,
+            card.ability.extra.money_transfer,
             card.ability.switched and '[TRANSFER]' or '[CACHE]',
 			card.ability.extra.money_stored,
             localize('Diamonds', 'suits_singular'),
@@ -50,12 +50,39 @@ SMODS.Joker {
 
 	calculate = function(self, card, context)
         if context.buying_card then
-            card.ability.extra.money_stored = card.ability.extra.money_stored + card.ability.extra.money_gain
-            return {
-                message = localize { type = 'variable', key = 'cached_pyrite'},
-                colour = HEX('c78544'),
-                focus = card
-            }
+            if not card.ability.switched then
+                card.ability.extra.money_stored = card.ability.extra.money_stored + card.ability.extra.money_gain
+                return {
+                    message = localize { type = 'variable', key = 'cached_pyrite'},
+                    colour = HEX('c78544'),
+                    focus = card
+                }
+            end
+        end
+
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            if card.ability.switched and context.other_card:is_suit("Diamonds") then
+                if card.ability.extra.money_stored then
+                    G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.money_transfer
+                    card.ability.extra.money_stored = card.ability.extra.money_stored - card.ability.extra.money_transfer
+                end
+
+                return {
+                    dollars = card.ability.extra.money_transfer,
+
+                    message = localize { type = 'variable', key = 'transfer_pyrite'},
+                    colour = HEX('c78544'),
+                    focus = card,
+                    func = function() -- This is for timing purposes, it runs after the dollar manipulation
+                        G.E_MANAGER:add_event(Event({
+                        func = function()
+                        G.GAME.dollar_buffer = 0
+                        return true
+                        end
+                    }))
+                    end
+                }
+            end
         end
 	end
 }

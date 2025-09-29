@@ -112,6 +112,9 @@ return {
             cached_pyrite = {
                 "Cached!"
             },
+            transfer_pyrite = {
+                "Transferred!"
+            },
         },
         v_text={},
     },

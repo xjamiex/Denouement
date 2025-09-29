@@ -12,8 +12,7 @@ function G.UIDEF.use_and_sell_buttons(card)
     local sell = nil
 
     if card.area and card.area == G.pack_cards then
-        use_and_sell_buttons(card)
-        return
+        return use_and_sell_buttons(card)
     end
 
     if card.config.center.denouement_can_switch then
@@ -50,11 +49,10 @@ function G.UIDEF.use_and_sell_buttons(card)
                 }},
                 }},
         }}
-        use_and_sell_buttons(card)
         return t
     end
 
-    use_and_sell_buttons(card)
+    return use_and_sell_buttons(card)
 end
 
 G.FUNCS.can_switch_state = function (card)
